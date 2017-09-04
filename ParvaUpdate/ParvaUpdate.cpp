@@ -4,177 +4,237 @@
 #include "stdafx.h"
 #include "ParvaUpdate.h"
 
+#include "ParvaImg.h"
+
 #define MAX_LOADSTRING 100
 
 // 全局变量: 
 HINSTANCE hInst;                                // 当前实例
+HWND    hwndMainDlg;
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
 WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
+CHAR szRemoteServer[MAX_LOADSTRING];			// 默认远程服务器地址
+CHAR szInstallJson[MAX_LOADSTRING];				// 默认离线配置文件名
 
-// 此代码模块中包含的函数的前向声明: 
-ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
+HWND hwndDownloadProgress; //下载进度条
+HWND hwndSetupProgress;    //安装进度条
+
+LRESULT CALLBACK mainDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARAM);
+static void goToScreenCenter(HWND hwnd);
+
+
+static DWORD WINAPI startInstallProc(void *);
+//提供给CURL下载进度回调的函数，用于保存下载的数据到文件  
+static size_t   DownloadCallback(void* pBuffer, size_t nSize, size_t nMemByte, void* pParam);
+//提供给CURL下载进度回调的函数，用于计算下载进度通知界面  
+static int ProgressCallback(void *clientp, double dltotal, double dlnow, double ultotal, double ulnow);
+
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPWSTR    lpCmdLine,
+	_In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: 在此放置代码。
+	hInst = hInstance;
 
-    // 初始化全局字符串
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_PARVAUPDATE, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+	memset(szRemoteServer, 0, MAX_LOADSTRING);
+	memset(szInstallJson, 0, MAX_LOADSTRING);
+	::LoadStringA(hInst, IDS_SERVERADDR, szRemoteServer, MAX_LOADSTRING);
+	::LoadStringA(hInst, IDS_INSTALLJSON, szInstallJson, MAX_LOADSTRING);
 
-    // 执行应用程序初始化: 
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
-
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PARVAUPDATE));
-
-    MSG msg;
-
-    // 主消息循环: 
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
-
-    return (int) msg.wParam;
+	::DialogBox(hInst, (LPCTSTR)IDD_MAINDLG, GetDesktopWindow(), reinterpret_cast<DLGPROC>(mainDlgProc));
 }
 
 
 
-//
-//  函数: MyRegisterClass()
-//
-//  目的: 注册窗口类。
-//
-ATOM MyRegisterClass(HINSTANCE hInstance)
+LRESULT CALLBACK mainDlgProc(HWND hWndDlg, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-    WNDCLASSEXW wcex;
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+	static bool isMouseDown = false;
+	static int x, y;
+	hwndMainDlg = hWndDlg;
+	static HWND hwndiMG;
 
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PARVAUPDATE));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PARVAUPDATE);
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	switch (Msg)
+	{
+	case WM_INITDIALOG:
+		hwndDownloadProgress = ::GetDlgItem(hWndDlg, IDC_PROGRESSDOWNLOAD);
+		SendMessage(hwndDownloadProgress, PBM_SETRANGE, 0, MAKELPARAM(0, 100));
 
-    return RegisterClassExW(&wcex);
+		hwndSetupProgress = ::GetDlgItem(hWndDlg, IDC_PROGRESSSETUP);
+		SendMessage(hwndSetupProgress, PBM_SETRANGE, 0, MAKELPARAM(0, 100));
+
+		/* progress increase*/
+		PostMessage(hwndSetupProgress, PBM_SETSTEP, (WPARAM)60, 0);
+		PostMessage(hwndSetupProgress, PBM_STEPIT, 0, 0);
+
+
+		goToScreenCenter(hWndDlg);
+
+		::CreateThread(NULL, 0, startInstallProc, NULL, 0, NULL);
+
+		break;
+	case WM_COMMAND:
+		switch (wParam)
+		{
+		case IDOK:
+		case IDCANCEL:
+			MessageBox(hWndDlg, _T("OK"), _T("测试标题"), MB_OK);
+			EndDialog(hWndDlg, 0);
+			return TRUE;
+		}
+		break;
+
+
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		RECT  rc;
+
+		/*	auto hdc = BeginPaint(hWndDlg, &ps);
+		GetWindowRect(hWndDlg, &rc);
+		ParvaImg* pi = new ParvaImg(hdc);
+		pi->DrawImage(_T("res\\背景.png"), rc);
+		delete pi;
+		EndPaint(hWndDlg, &ps);*/
+
+		hwndiMG = ::GetDlgItem(hWndDlg, IDC_SHOWIMAGE);
+
+		auto hdc = BeginPaint(hwndiMG, &ps);
+		GetWindowRect(hwndiMG, &rc);
+
+		ParvaImg* pi = new ParvaImg(hdc);
+		pi->SetDC(hdc);
+		//pi->DrawImage(hInst, IDB_PARVAPNG, rc);
+		pi->DrawImage(_T("res\\背景.png"), rc);
+		delete pi;
+
+		EndPaint(hwndiMG, &ps);
+	}
+	break;
+
+	case WM_LBUTTONDOWN:
+		isMouseDown = true;
+		x = LOWORD(lParam);
+		y = HIWORD(lParam);
+		break;
+	case WM_MOUSEMOVE:
+		if (isMouseDown)
+		{
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
+
+			RECT rc;
+			::GetWindowRect(hWndDlg, &rc);
+
+			rc.left += (xPos - x);
+			rc.top += (yPos - y);
+			::SetWindowPos(hWndDlg, HWND_TOP, rc.left, rc.top, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE);
+		}
+		break;
+	case WM_LBUTTONUP:
+		isMouseDown = false;
+		break;
+	}
+	return FALSE;
 }
 
-//
-//   函数: InitInstance(HINSTANCE, int)
-//
-//   目的: 保存实例句柄并创建主窗口
-//
-//   注释: 
-//
-//        在此函数中，我们在全局变量中保存实例句柄并
-//        创建和显示主程序窗口。
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+
+static void goToScreenCenter(HWND hwnd)
 {
-   hInst = hInstance; // 将实例句柄存储在全局变量中
+	RECT screenRc;
+	::SystemParametersInfo(SPI_GETWORKAREA, 0, &screenRc, 0);
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+	POINT center;
+	center.x = screenRc.left + (screenRc.right - screenRc.left) / 2;
+	center.y = screenRc.top + (screenRc.bottom - screenRc.top) / 2;
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+	RECT rc;
+	::GetWindowRect(hwnd, &rc);
+	int x = center.x - (rc.right - rc.left) / 2;
+	int y = center.y - (rc.bottom - rc.top) / 2;
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+	::SetWindowPos(hwnd, HWND_TOP, x, y, rc.right - rc.left, rc.bottom - rc.top, SWP_SHOWWINDOW);
+};
 
-   return TRUE;
+static DWORD WINAPI startInstallProc(void *)
+{
+	/*
+	1.init curl
+	2.download json file
+	3.anlyze json file
+	4.download file and save to tmp path
+	5.copy or unzip file
+	6.set reg or set path
+	7.clear file
+	8.show success info
+
+
+	CURL *curl;
+	CURLcode res = CURLE_FAILED_INIT;
+
+	curl = curl_easy_init();
+	if (curl)
+	{
+	//设置接收数据的回调
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, DownloadCallback);
+	//设置进度回调函数
+	curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, ProgressCallback);
+	curl_easy_setopt(curl, CURLOPT_URL,  szRemoteServer);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 0);
+
+	res = curl_easy_perform(curl);
+	if (res == CURLE_OK)
+	{
+	long retcode = 0;
+	CURLcode code = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &retcode);
+	if (retcode != 200)
+	{//error find file!
+
+	}
+	}
+	else
+	{
+	//查看是否有出错信息
+	const char* pError = curl_easy_strerror(res);
+	::MessageBoxA(hwndMainDlg, pError, "错误", MB_OK | MB_ICONERROR);
+	}
+	curl_easy_cleanup(curl);
+	}
+	*/
+
+
+
+
+	return 0;
 }
 
-//
-//  函数: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  目的:    处理主窗口的消息。
-//
-//  WM_COMMAND  - 处理应用程序菜单
-//  WM_PAINT    - 绘制主窗口
-//  WM_DESTROY  - 发送退出消息并返回
-//
-//
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+
+static size_t DownloadCallback(void* pBuffer, size_t nSize, size_t nMemByte, void* pParam)
 {
-    switch (message)
-    {
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // 分析菜单选择: 
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 在此处添加使用 hdc 的任何绘图代码...
-            EndPaint(hWnd, &ps);
-        }
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
+	//把下载到的数据以追加的方式写入文件(一定要有a，否则前面写入的内容就会被覆盖了)  
+	FILE* fp = NULL;
+	fopen_s(&fp, "d:\\test.html", "ab+");
+	size_t nWrite = fwrite(pBuffer, nSize, nMemByte, fp);
+	fclose(fp);
+	return nWrite;
 }
 
-// “关于”框的消息处理程序。
-INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+static int ProgressCallback(void *clientp, double dltotal, double dlnow, double ultotal, double ulnow)
 {
-    UNREFERENCED_PARAMETER(lParam);
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
-            return (INT_PTR)TRUE;
-        }
-        break;
-    }
-    return (INT_PTR)FALSE;
+	if (dltotal > -0.1 && dltotal < 0.1)
+		return 0;
+	int nPos = (int)((dlnow / dltotal) * 100);
+	//通知进度条更新下载进度  
+	//::PostMessage(hwndDownloadProgress, WM_USER + 110, nPos, 0);
+	//::Sleep(10);  
+	return 0;
 }
+
+
+
