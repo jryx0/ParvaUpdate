@@ -208,10 +208,15 @@ static DWORD WINAPI startInstallProc(void *)
 	}
 	curl_easy_cleanup(curl);
 	}	*/
+
+	auto r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/login.aspx" });
+	if (r.status_code == 200)
+	{
+		int index = r.text.find("name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=");
+ 	}
 	
-	auto r = cpr::Get(cpr::Url{ "https://api.github.com/repos/whoshuu/cpr/contributors" },
-		cpr::Authentication{ "user", "pass" },
-		cpr::Parameters{ { "anon", "true" },{ "key", "value" } });
+	r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/OfflineInstall.json" },
+		cpr::Authentication{ "user", "pass" });
 	r.status_code;                  // 200
 	r.header["content-type"];       // application/json; charset=utf-8
 	r.text;                         // JSON text string
