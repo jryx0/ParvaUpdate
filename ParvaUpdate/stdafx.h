@@ -40,4 +40,9 @@
 #pragma comment (lib , "Crypt32.lib")
 #endif // _CYRPT 
 
+#ifdef _DEBUG
+#pragma comment(lib, "gumbod.lib")	  
+#else
+#pragma comment(lib, "gumbo.lib") 
+#endif
 

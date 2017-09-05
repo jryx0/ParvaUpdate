@@ -125,13 +125,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;..\lib\gumbo\src;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;..\lib\gumbo\src;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -143,13 +143,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;..\lib\gumbo\src;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;..\lib\gumbo\src;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -172,7 +172,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Debug;..\lib\gumbo\visualc\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">
@@ -188,7 +188,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Debug - DLL Windows SSPI;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Debug - DLL Windows SSPI;..\lib\gumbo\visualc\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -233,7 +233,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Release;..\lib\gumbo\visualc\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">
@@ -253,7 +253,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Release - DLL Windows SSPI;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\lib\curl-7_54_1\build\Win32\VC14\LIB Release - DLL Windows SSPI;..\lib\gumbo\visualc\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "ParvaUpdate.h"
 #include "cpr/cpr.h"
-
+#include "gumbo.h"
 
 #include "ParvaImg.h"
 
@@ -212,7 +212,9 @@ static DWORD WINAPI startInstallProc(void *)
 	auto r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/login.aspx" });
 	if (r.status_code == 200)
 	{
-	
+		GumboOutput* output = gumbo_parse(r.text.data());
+		// Do stuff with output->root
+		gumbo_destroy_output(&kGumboDefaultOptions, output);
  	}
 	
 	r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/OfflineInstall.json" },
@@ -220,14 +222,7 @@ static DWORD WINAPI startInstallProc(void *)
 	r.status_code;                  // 200
 	r.header["content-type"];       // application/json; charset=utf-8
 	r.text;                         // JSON text string
-
-
-
-
-
-
-
-	
+		
 
 	return 0;
 }
