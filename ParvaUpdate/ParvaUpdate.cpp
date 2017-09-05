@@ -212,7 +212,7 @@ static DWORD WINAPI startInstallProc(void *)
 	auto r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/login.aspx" });
 	if (r.status_code == 200)
 	{
-		int index = r.text.find("name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=");
+	
  	}
 	
 	r = cpr::Get(cpr::Url{ "http://156.18.1.93/tmpa/OfflineInstall.json" },
@@ -222,6 +222,12 @@ static DWORD WINAPI startInstallProc(void *)
 	r.text;                         // JSON text string
 
 
+
+
+
+
+
+	
 
 	return 0;
 }
