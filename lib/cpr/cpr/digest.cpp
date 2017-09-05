@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/digest.h"
 
 namespace cpr {

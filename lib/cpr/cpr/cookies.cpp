@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/cookies.h"
 
 #include "cpr/util.h"

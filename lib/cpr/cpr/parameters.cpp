@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/parameters.h"
 
 #include <initializer_list>

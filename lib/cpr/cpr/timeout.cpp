@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/timeout.h"
 
 #include <limits>
@@ -6,7 +7,8 @@
 #include <type_traits>
 
 namespace cpr {
-
+#undef min
+#undef max
 long Timeout::Milliseconds() const {
     static_assert(std::is_same<std::chrono::milliseconds, decltype(ms)>::value,
                   "Following casting expects milliseconds.");

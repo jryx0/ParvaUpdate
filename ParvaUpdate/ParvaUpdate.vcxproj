@@ -125,13 +125,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -143,13 +143,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\lib\cpr\include;..\lib\curl-7_54_1\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -290,6 +290,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\lib\cpr\include\cpr\api.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\auth.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\body.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\cookies.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\cpr.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\cprtypes.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\curlholder.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\defines.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\digest.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\error.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\low_speed.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\max_redirects.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\multipart.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\parameters.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\payload.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\proxies.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\response.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\session.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\ssl_options.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\timeout.h" />
+    <ClInclude Include="..\lib\cpr\include\cpr\util.h" />
     <ClInclude Include="ParvaImg.h" />
     <ClInclude Include="ParvaUpdate.h" />
     <ClInclude Include="Resource.h" />
@@ -297,6 +318,84 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\cpr\cpr\auth.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\cookies.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\cprtypes.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\digest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\error.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\multipart.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\parameters.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\payload.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\proxies.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\session.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\ssl_options.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\timeout.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\lib\cpr\cpr\util.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release-WinSSIP|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ParvaImg.cpp" />
     <ClCompile Include="ParvaUpdate.cpp" />
     <ClCompile Include="stdafx.cpp">

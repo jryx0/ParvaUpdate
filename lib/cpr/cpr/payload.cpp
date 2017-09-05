@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/payload.h"
 
 #include <initializer_list>

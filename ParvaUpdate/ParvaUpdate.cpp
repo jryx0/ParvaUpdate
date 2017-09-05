@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 #include "ParvaUpdate.h"
+#include "cpr/cpr.h"
+
 
 #include "ParvaImg.h"
 
@@ -205,9 +207,14 @@ static DWORD WINAPI startInstallProc(void *)
 	::MessageBoxA(hwndMainDlg, pError, "´íÎó", MB_OK | MB_ICONERROR);
 	}
 	curl_easy_cleanup(curl);
-	}
-	*/
-
+	}	*/
+	
+	auto r = cpr::Get(cpr::Url{ "https://api.github.com/repos/whoshuu/cpr/contributors" },
+		cpr::Authentication{ "user", "pass" },
+		cpr::Parameters{ { "anon", "true" },{ "key", "value" } });
+	r.status_code;                  // 200
+	r.header["content-type"];       // application/json; charset=utf-8
+	r.text;                         // JSON text string
 
 
 

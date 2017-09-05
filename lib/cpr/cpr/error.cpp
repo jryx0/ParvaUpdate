@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/error.h"
 
 #include <curl/curl.h>

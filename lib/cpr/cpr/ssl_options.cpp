@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/ssl_options.h"
 
 namespace cpr {

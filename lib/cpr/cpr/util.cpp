@@ -1,3 +1,5 @@
+
+#include "stdafx.h"
 #include "cpr/util.h"
 
 #include <algorithm>
@@ -9,6 +11,10 @@
 #include <vector>
 
 namespace cpr {
+
+#undef min
+#undef max
+
 namespace util {
 
 Header parseHeader(const std::string& headers) {

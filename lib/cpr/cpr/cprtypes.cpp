@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/cprtypes.h"
 
 #include <algorithm>

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "cpr/proxies.h"
 
 #include <initializer_list>
