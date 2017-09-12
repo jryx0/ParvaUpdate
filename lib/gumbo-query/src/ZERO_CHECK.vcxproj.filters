@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\CMakeFiles\2247f63aa75c8d2eaa36cbeb8305372a\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5B86604E-036E-33A2-823E-E1C45D28E9DD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

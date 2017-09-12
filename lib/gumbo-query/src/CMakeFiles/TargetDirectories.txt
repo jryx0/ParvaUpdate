@@ -1,0 +1,5 @@
+D:/Programming/ParvaUpdate/lib/gumbo-query/src/CMakeFiles/gumbo_query_shared.dir
+D:/Programming/ParvaUpdate/lib/gumbo-query/src/CMakeFiles/gumbo_query_static.dir
+D:/Programming/ParvaUpdate/lib/gumbo-query/src/CMakeFiles/INSTALL.dir
+D:/Programming/ParvaUpdate/lib/gumbo-query/src/CMakeFiles/ALL_BUILD.dir
+D:/Programming/ParvaUpdate/lib/gumbo-query/src/CMakeFiles/ZERO_CHECK.dir

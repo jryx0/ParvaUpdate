@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\cpr">
-      <UniqueIdentifier>{09831bc7-1cb6-49c5-9ae9-3de2ee55a970}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\cpr">
-      <UniqueIdentifier>{6ff6049b-f943-40f7-8d27-11f909474f03}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -36,69 +30,6 @@
     <ClInclude Include="ParvaImg.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\cpr.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\api.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\auth.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\body.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\cookies.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\cprtypes.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\curlholder.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\defines.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\digest.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\error.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\low_speed.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\max_redirects.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\multipart.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\parameters.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\payload.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\proxies.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\response.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\session.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\ssl_options.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\timeout.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cpr\include\cpr\util.h">
-      <Filter>头文件\cpr</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -109,45 +40,6 @@
     </ClCompile>
     <ClCompile Include="ParvaImg.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\auth.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\cookies.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\cprtypes.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\digest.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\error.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\multipart.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\parameters.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\payload.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\proxies.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\session.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\ssl_options.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\timeout.cpp">
-      <Filter>源文件\cpr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\cpr\cpr\util.cpp">
-      <Filter>源文件\cpr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

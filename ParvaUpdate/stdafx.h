@@ -46,3 +46,4 @@
 #pragma comment(lib, "gumbo.lib") 
 #endif
 
+#pragma comment(lib, "gq.lib")

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Document.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\QueryUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Selection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\Selector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Programming\ParvaUpdate\lib\gumbo-query\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{69E57B57-8C30-327A-87E1-AFA8986416A2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
